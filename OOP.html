@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OOP in JS</title>
+</head>
+
+<body>
+    <h1>OOP with JS by Code ABC</h1>
+
+
+
+    <script>
+        /* Topic 1 : Functional Constructor: functional constructor এ আমরা function delcalration এর মাধ্যমে Object এর blue-print create করি এবং পরে একটা variable এ new keyword এর সাহায্যে instantiate করে নতুন object create করে থাকি। আর যেহেতু functional constructor এ instantiate করার সময় automatically Object construct হয় তাই আমাদের constructor keyword use করতে হয় না যেটা Class Constructor এ অবশ্যই দরকার পরে */
+
+        /*
+        //Basic Obj in JS
+        const obj = {};
+
+        obj.name = "code ABC";
+        obj.model = "mdl-25k";
+
+        console.log(obj)
+
+
+
+
+        //Function Constructor for creating objects
+                // 4 rules of Function Constructor:
+                        // 1. create an empty object {}
+                        // 2. function is called this = {}
+                        // 3. {} linked to the prototype
+                        // 4. {} will return automatically
+
+
+        const Computer = function (name, model) {
+            this.name = name;
+            this.model = model
+
+            this.aboutComputer = function () {
+                console.log(`this computer name is ${this.name} and the model is ${this.model}`)
+            }
+        }
+
+        const dell = new Computer("dell", "dkl25");
+        console.log(dell)
+        dell.aboutComputer()
+ */
+
+
+
+
+        /* Topic 2 : Prototype : যেকোন arrayকে যখন declare করা হয় তখন এর ভিতরে automatically বেশ কিছু default functions (filter,map,foreach,find,concat etc..) prototype এর ভিতরে থাকে যা নরমালি array এর element হিসেবে show করে না কিন্তু যখন দরকার সরাসরি ডট(.) এর পরে use করা যায় । আবার আমরা চাইলে এই prototyper এর ভিতরে যেকোন functions কে modify করে তার default behaviour কে change ও করতে পারি*/
+
+        /*
+        // default array prototype
+        const array = [2, 5, 76, 23, 33, 22];
+        console.log("array", array)
+        const protoType = array.__proto__
+        console.log("protoType", protoType)
+
+        const evenNumber = array.filter(element => element % 2 === 0);
+        console.log("evenNumber in array", evenNumber)
+
+
+        // modify array prototype "filter" [এখন এটা জোড় এর যায়গায় বিজোড় দেখাবে] 
+        Array.prototype.filter = function () {
+            let arr = [];
+
+            for (let i = 0; i < this.length; i++) {
+                if (this[i] % 2 === 1) {
+                    arr.push(this[i]);
+                }
+            }
+
+            return arr
+        }
+
+        const falseEvenNumber = array.filter(element => element % 2 === 0);
+        console.log("falseEvenNumber", falseEvenNumber)
+
+
+
+        // Example of prototype in functional constructor
+        const Computer = function (name, model) {
+            this.name = name;
+            this.model = model
+
+            // instantiating এর সময় সরাসরি দেখাবে
+            this.aboutComputer = function () {
+                console.log(`this computer name is ${this.name} and the model is ${this.model}`)
+            }
+        }
+
+        // instantiating এর সময় সরাসরি দেখাবে না বরং prototype এ রাখবে
+        Computer.prototype.aboutComputerProtoType = function () {
+            console.log(`${this.name}'s prototype function which is normally hidden but can be called when needed`)
+        }
+
+        const dell = new Computer("dell", "dkl25");
+        const hp = new Computer("hp", "dd33");
+        console.log("dell", dell)
+        dell.aboutComputer()
+        dell.aboutComputerProtoType()
+
+        console.log("hp", hp)
+        hp.aboutComputer()
+        hp.aboutComputerProtoType()
+ */
+
+
+
+
+        /* Topic 3 : prototype chaining : যদি কখনো এমন দরকার পরে যে আমাদের parent এর সকল protoType এর access তার সাপেক্ষে তৈরিকৃত object এর মাঝে দরকার তখন আমরা proto chaining এর মাধ্যমে kid এ (.__proto__) inherrite করতে পারি কিংবা আমরা চাইলে default Object() function use করে কোন নির্দিষ্ট object অথবা array এর অভ্যন্তরিন prototype কে inherrite করতে পারি */
+
+        /*
+                // Example of prototype in functional constructor
+                const Computer = function (name, model) {
+                    this.name = name;
+                    this.model = model
+        
+                    // instantiating এর সময় সরাসরি দেখাবে
+                    this.aboutComputer = function () {
+                        console.log(`this computer name is ${this.name} and the model is ${this.model}`)
+                    }
+                }
+        
+                // instantiating এর সময় সরাসরি দেখাবে না বরং prototype এ রাখবে
+                Computer.prototype.aboutComputerProtoType = function () {
+                    console.log(`${this.name}'s prototype function which is normally hidden but can be called when needed`)
+                }
+        
+        
+                const dell = new Computer("dell", "dkl25");
+                console.log("dell", dell)
+        
+                console.log("direct parent prototype", Computer.prototype)
+                console.log("kids inherrited prototype", dell.__proto__)
+                console.log("parent vs kids inherrited prototype = ", Computer.prototype === dell.__proto__);
+        
+                console.log("prototype hasOwnProperty ", dell.hasOwnProperty("name"))
+        
+        
+        
+                // Prototypical chaining by Object() function
+                console.log("default Object function", Object())
+                console.log("prototype getPrototypeOf dell", Object.getPrototypeOf(dell)); */
+
+
+
+
+        /* Topic 4 : OOP challenge with Functional Constructor : একটা functional constructor বানাতে হবে যা বাড়ির ভাড়া কে parameter হিসেবে নেয় আর তার ভিতরে কিছু methods থাকবে যা প্রতিবছর ভাড়া ১০০০ টাকা করে বাড়াবে */
+
+
+        /* 
+                const House = function (name, rent) {
+                    this.name = name;
+                    this.rent = rent;
+        
+                }
+                House.prototype.increaseRentPerYear = function (year) {
+                    this.rent += 1000;
+                    console.log(`you are living in ${this.name} for ${year} years and rent increased by ${1000 * year} and now the rent is ${this.rent}`)
+                }
+                House.prototype.decreaseRentPerYear = function (year) {
+                    this.rent -= 1000;
+                    console.log(`you are living in ${this.name} for ${year} years and rent decreased by ${1000 * year} and now the rent is ${this.rent}`)
+                }
+        
+        
+                const rahimHouse = new House("rahim villa", 10000);
+                console.log(rahimHouse)
+                rahimHouse.increaseRentPerYear(1);
+                rahimHouse.increaseRentPerYear(2);
+                rahimHouse.decreaseRentPerYear(3);
+         */
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
