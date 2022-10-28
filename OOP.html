@@ -155,7 +155,7 @@
         /* Topic 4 : OOP challenge with Functional Constructor : একটা functional constructor বানাতে হবে যা বাড়ির ভাড়া কে parameter হিসেবে নেয় আর তার ভিতরে কিছু methods থাকবে যা প্রতিবছর ভাড়া ১০০০ টাকা করে বাড়াবে */
 
 
-        /* 
+        /*
                 const House = function (name, rent) {
                     this.name = name;
                     this.rent = rent;
@@ -177,6 +177,172 @@
                 rahimHouse.increaseRentPerYear(2);
                 rahimHouse.decreaseRentPerYear(3);
          */
+
+
+
+
+        /* Topic 5 : class Constructor : আমরা যখন class এর সাহায়ে কোন object create করি তখন parent blur-print এর ভিতরে constructor() method কে define করে দিতে হয় যেটাই মূলত object-body আর এর ভিতরে যা যা থাকে(key-value,method,console) সবে instantiating এর সময় automatically call হয়ে যায়। আর এর বাহিরের যত কিছু সেগুলা prototype হয়ে যায়
+            => class constructor এ আমরা বিভিন্ন রকম custom methods define করতে পারি যেগুলো আমরা যখন যখন চাই তখন তখন কল করতে পারি।
+            => class constructor এ কিছু default method থাকে যেমন static,getter,setter,extends,super,constructor ইত্যাদি।
+                => static method কেবল মাত্র class এর ভিতরে কল করা যায়। এবং এই static method কেবলই parent এর সাথে accessible হয়।
+                => getter এবং setter এর মাধ্যমে আমরা কিছু কিছু কে প্রকাশ করতে পারি এবং কিছু কিছু কে পরিবর্তন করতে পারি। তবে এদের কে use করার সময় function এর মত করে use করা যাবে না বরং object chaining এর মত করে use করতে হবে।
+
+        */
+
+
+        /*
+                class Computer {
+                    constructor(name, model) {
+                        this.name = name;
+                        this.model = model;
+                    }
+        
+                    aboutComputer() {
+                        console.log(`this computer name is ${this.name} and the model is ${this.model}`);
+                    }
+        
+        
+        
+                    static staticAboutComputer = function () {
+                        console.log("this is computer");
+                    }
+        
+        
+        
+                    get getComputerName() {
+                        return this.name;
+                    }
+        
+                    set setComputerName(value) {
+                        this.name = value;
+                    }
+                }
+        
+        
+                const dell = new Computer('Dell', "sldk33");
+                console.log(dell);
+                dell.aboutComputer();
+        
+        
+                // static funciton
+                Computer.staticAboutComputer()
+                // dell.sayAboutComputer() // not accessible in child class 
+        
+                // getter and setter
+                console.log(dell.getComputerName) // getter
+                dell.setComputerName = "new dell" // setter modifies value
+                console.log(dell) // watch modified name
+         */
+
+
+
+
+        /* Topic 6 : inherritence : ধরুন আমার বাবার ২৫ শতক জায়গা আছে যেটা আমি উত্তরাধিকার সূত্রে পেয়েছি তার পাশাপাশি আমি আরো ৫ শতক কিনেছে তাহলে আমার ছেলে উত্তারাধিকার সূত্রে মোট ৩০ শতক পাবে এই জিনিসটাকে যদি আমি object এ define করতে চাই তাহলে আমি class constructor এর extends,super ইত্যাদি methods গুলো use করব নিচের মত করে
+                => এখানে extends method abdullah কে তার বংশ জন্ম পরিচয় বলে দিচ্ছে আর super method এর সাহায়ে সে তার বাবার থেকে আমার উত্তারাধিকার সম্পদ বুঝে নিচ্ছে ।
+        */
+
+
+        /*
+                class Afzal {
+                    constructor(lineage, name, age, afzalProperty) {
+                        this.lineage = "ibn Kumar Ali ";
+                        this.name = name;
+                        this.age = age;
+                        this.afzalProperty = afzalProperty;
+                    }
+        
+                    aboutAfzalProperty() {
+                        console.log(`this afzal property is ${this.afzalProperty}`);
+                    }
+                }
+        
+                class Asif extends Afzal {
+                    constructor(lineage, name, age, afzalProperty, asifProperty) {
+                        super(lineage, name, age, afzalProperty);
+                        this.lineage += lineage;
+                        this.asifProperty = asifProperty;
+                        this.totalProperty = this.afzalProperty + this.asifProperty;
+                    }
+        
+                    aboutAsifOwnProperty() {
+                        console.log(`this asif own property is ${this.asifProperty}`);
+                    }
+        
+                    aboutYourTotalProperty() {
+                        console.log(`this your total property is ${this.totalProperty}`);
+                    }
+                }
+        
+        
+                const abdullah = new Asif("ibn Afzal ibn Asif ", "abdullah", 25, 100000, 50000);
+                console.log(abdullah);
+                abdullah.aboutAfzalProperty();
+                abdullah.aboutAsifOwnProperty();
+                abdullah.aboutYourTotalProperty(); */
+
+
+
+
+        /* Topic 7 : basic methods of OOP :
+            => abstruction : আমরা যখন কোন project বানাই তখন আমরা অনেক অনেক coding implement করি যা আসলে user এর কোন কাজেই আসে না যাদের low level programming work বলে এই সব operational functionality গুলোকে smartly hide করে যাওয়া  আর কেবল usefull functionality গুলোকেই তুলে ধরা কেই abstruction বলে
+            => encapsulation : কোন কোন সময় আমাদের কিছু private varibale,method আমাদের দরকার পরে  
+            => polymorphism : parent class এর কোন function কে নিজের প্রয়োজনমত modify করে child class এ itroducce করানোকে polymorphism বলে
+            */
+
+
+
+        class Computer {
+            // private field encapsulation
+            #warenty_encapsulation
+            constructor(name, model) {
+                this.name = name;
+                this.model = model;
+                this.#warenty_encapsulation = warenty
+            }
+
+            aboutComputer() {
+                console.log(`this computer name is ${this.name} and the model is ${this.model}`);
+            }
+
+
+            // private method encapsulation
+            #aboutWarenty_encapsulation() {
+                console.log(`${this.#warenty_encapsulation} years of warenty provide dell`)
+            }
+        }
+
+        class Hp extends Computer {
+            constructor(name, model, warenty) {
+                super(name, model);
+                this.warenty = warenty;
+                console.log("this is hp computer");
+            }
+
+            aboutWarenty() {
+                console.log(`${this.name} provider ${this.warenty} year of warenty`);
+            }
+
+            // abrtraction for hiding use-time of computer
+            useComputer(value) {
+                console.log(`${(this.warenty * 12 * 30) - (value * 30)} day warenty remaing `);
+            }
+
+            // polymorphism
+            aboutComputer() {
+                console.log(`this computer name is ${this.name} and the model is ${this.model} and the color is ${this.color}`);
+            }
+        }
+
+        let hp_dk34 = new Hp("HP", "dk34", 3);
+        console.log(hp_dk34)
+        hp_dk34.aboutWarenty()
+
+        // abstruction method
+        hp_dk34.useComputer(6.5)
+
+        // polymorphism method
+        hp_dk34.aboutComputer();
+
 
 
 
