@@ -55,6 +55,8 @@
 
         /* Topic 2 : Prototype : যেকোন arrayকে যখন declare করা হয় তখন এর ভিতরে automatically বেশ কিছু default functions (filter,map,foreach,find,concat etc..) prototype এর ভিতরে থাকে যা নরমালি array এর element হিসেবে show করে না কিন্তু যখন দরকার সরাসরি ডট(.) এর পরে use করা যায় । আবার আমরা চাইলে এই prototyper এর ভিতরে যেকোন functions কে modify করে তার default behaviour কে change ও করতে পারি*/
 
+
+
         /*
         // default array prototype
         const array = [2, 5, 76, 23, 33, 22];
@@ -115,6 +117,8 @@
 
 
         /* Topic 3 : prototype chaining : যদি কখনো এমন দরকার পরে যে আমাদের parent এর সকল protoType এর access তার সাপেক্ষে তৈরিকৃত object এর মাঝে দরকার তখন আমরা proto chaining এর মাধ্যমে kid এ (.__proto__) inherrite করতে পারি কিংবা আমরা চাইলে default Object() function use করে কোন নির্দিষ্ট object অথবা array এর অভ্যন্তরিন prototype কে inherrite করতে পারি */
+
+
 
         /*
                 // Example of prototype in functional constructor
@@ -285,64 +289,76 @@
 
         /* Topic 7 : basic methods of OOP :
             => abstruction : আমরা যখন কোন project বানাই তখন আমরা অনেক অনেক coding implement করি যা আসলে user এর কোন কাজেই আসে না যাদের low level programming work বলে এই সব operational functionality গুলোকে smartly hide করে যাওয়া  আর কেবল usefull functionality গুলোকেই তুলে ধরা কেই abstruction বলে
-            => encapsulation : কোন কোন সময় আমাদের কিছু private varibale,method আমাদের দরকার পরে  
+            => encapsulation : কোন কোন সময় আমাদের কিছু private varibale,method আমাদের দরকার পরে যা আমরা কেবল parent class constructor এর মাঝেই accessible হিসেবে চাই এর বাইরে বা child class এ এদের access দিতে চাই না এই সব ক্ষেত্রে আমরা #varibale or #method ব্যবহার করে এই কাজটা করতে পারি । এই ঘটনাকেই encapsulation বলে। 
+            তবে আমরা যদি parent class এর কোন shared method or variable এর সাথে এই private variable or method কে call করি তখন কিন্তু তা আবার child class এ দেখানো যাবে 
             => polymorphism : parent class এর কোন function কে নিজের প্রয়োজনমত modify করে child class এ itroducce করানোকে polymorphism বলে
             */
 
 
-
-        class Computer {
-            // private field encapsulation
-            #warenty_encapsulation
-            constructor(name, model) {
-                this.name = name;
-                this.model = model;
-                this.#warenty_encapsulation = warenty
-            }
-
-            aboutComputer() {
-                console.log(`this computer name is ${this.name} and the model is ${this.model}`);
-            }
-
-
-            // private method encapsulation
-            #aboutWarenty_encapsulation() {
-                console.log(`${this.#warenty_encapsulation} years of warenty provide dell`)
-            }
-        }
-
-        class Hp extends Computer {
-            constructor(name, model, warenty) {
-                super(name, model);
-                this.warenty = warenty;
-                console.log("this is hp computer");
-            }
-
-            aboutWarenty() {
-                console.log(`${this.name} provider ${this.warenty} year of warenty`);
-            }
-
-            // abrtraction for hiding use-time of computer
-            useComputer(value) {
-                console.log(`${(this.warenty * 12 * 30) - (value * 30)} day warenty remaing `);
-            }
-
-            // polymorphism
-            aboutComputer() {
-                console.log(`this computer name is ${this.name} and the model is ${this.model} and the color is ${this.color}`);
-            }
-        }
-
-        let hp_dk34 = new Hp("HP", "dk34", 3);
-        console.log(hp_dk34)
-        hp_dk34.aboutWarenty()
-
-        // abstruction method
-        hp_dk34.useComputer(6.5)
-
-        // polymorphism method
-        hp_dk34.aboutComputer();
-
+        /* 
+                class Computer {
+                    // private field encapsulation
+                    #encapsulated_password
+                    constructor(name, model, encapsulated_password) {
+                        this.name = name;
+                        this.model = model;
+                        this.#encapsulated_password = encapsulated_password
+                    }
+        
+                    aboutComputer() {
+                        console.log(`this computer name is ${this.name} and the model is ${this.model}`);
+                    }
+        
+        
+                    // private method encapsulation
+                    #aboutEncapsulated_warenty() {
+                        console.log(`this ${this.#encapsulated_password} password is correct`);
+                    }
+        
+                    // call private method encapsulation
+                    callEncapsulatedByShared() {
+                        this.#aboutEncapsulated_warenty();
+                    }
+        
+                }
+        
+                class Hp extends Computer {
+                    constructor(name, model, encapsulated_password, warenty) {
+                        super(name, model, encapsulated_password);
+                        this.warenty = warenty;
+                        console.log("this is hp computer");
+                    }
+        
+                    aboutWarenty() {
+                        console.log(`${this.name} provider ${this.warenty} year of warenty`);
+                    }
+        
+                    // abrtraction for hiding use-time of computer
+                    useComputer(value) {
+                        console.log(`${(this.warenty * 12 * 30) - (value * 30)} day warenty remaing `);
+                    }
+        
+                    // polymorphism
+                    aboutComputer() {
+                        console.log(`this computer name is ${this.name} and the model is ${this.model} and the color is ${this.color}`);
+                    }
+                }
+        
+                let hp_dk34 = new Hp("HP", "dk34", "1a2b3c", 3);
+                console.log(hp_dk34)
+                hp_dk34.aboutWarenty()
+        
+                // abstruction method
+                hp_dk34.useComputer(6.5)
+        
+                // polymorphism method
+                hp_dk34.aboutComputer();
+        
+                // encapsulation method
+                hp_dk34.callEncapsulatedByShared() // accessible in child
+                // hp_dk34.encapsulated_password() // not accessible in child
+                // hp_dk34.#encapsulated_password() // not accessible in child
+         */
 
 
 
